@@ -2,7 +2,7 @@
 
 ## Live Link https://learntodev.vercel.app/
 
-Modern Education Platform Frontend built to provide a responsive, web-based educational interface for discovering courses, tracking enrollment status and displaying student/learners progression. The application will replicate an actual learning environment that allows students to view and select available course offerings and enroll into those selected courses, complete individual lessons within each selected course and track their progression within a personalized dashboard.
+The Frontend of Modern Education Platform is a web-based interactive educational interface for students to find and enroll in courses, track enrollment status, and see their progression. This app will create a real learning environment that will help students view and select available courses and then enroll into those chosen courses, study their material in each chosen course and also monitor their progress in an individual dashboard.
 
 ## Project Overview
 
