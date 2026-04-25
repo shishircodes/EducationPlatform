@@ -6,6 +6,7 @@ import CourseCard from "../components/CourseCard";
 import { fetchCourses } from "../api/mockApi";
 import { getResource } from "../api/resourceCache";
 import useUserStore from "../store/userStore";
+import homeArt from "../assets/homeart.webp";
 
 export default function Home() {
   const courses = use(getResource("courses", fetchCourses)).slice(0, 3);
@@ -18,30 +19,45 @@ export default function Home() {
 
   return (
     <div className="flex flex-col gap-20">
-      <section className="pt-6">
-        <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-fg sm:text-6xl">
-          Learn at your own pace,{" "}
-          <span className="text-brand">with realtime tracking.</span>
-        </h1>
-        <p className="mt-5 max-w-xl text-lg text-fg-muted">
-          Browse professional courses, enroll with a click, and track your progress
-          lesson by lesson. Your progress is saved on this device.
-        </p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link to="/courses">
-            <Button size="lg">Browse courses</Button>
-          </Link>
-          {loggedIn ? (
-            <Link to="/dashboard">
-              <Button variant="secondary" size="lg" className="gap-2">
-                My dashboard ({enrolledCount}) <FaArrowRight />
-              </Button>
+      <section className="grid items-center gap-10 pt-6 md:grid-cols-[1.1fr_1fr]">
+        <div>
+          <h1 className="text-5xl font-bold leading-tight tracking-tight text-fg sm:text-6xl">
+            Learn at your own pace,{" "}
+            <span className="text-brand">with realtime tracking.</span>
+          </h1>
+          <p className="mt-5 max-w-xl text-lg text-fg-muted">
+            Browse professional courses, enroll with a click, and track your
+            progress lesson by lesson. Your progress is saved on this device.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/courses">
+              <Button size="lg">Browse courses</Button>
             </Link>
-          ) : (
-            <Button variant="ink" size="lg" onClick={openGetStarted} className="gap-2">
-              Start Learning <FaArrowRight />
-            </Button>
-          )}
+            {loggedIn ? (
+              <Link to="/dashboard">
+                <Button variant="secondary" size="lg" className="gap-2">
+                  My dashboard ({enrolledCount}) <FaArrowRight />
+                </Button>
+              </Link>
+            ) : (
+              <Button
+                variant="ink"
+                size="lg"
+                onClick={openGetStarted}
+                className="gap-2"
+              >
+                Start Learning <FaArrowRight />
+              </Button>
+            )}
+          </div>
+        </div>
+
+        <div className="hidden justify-self-end md:block">
+          <img
+            src={homeArt}
+            alt=""
+            className="w-full max-w-md object-contain"
+          />
         </div>
       </section>
 
