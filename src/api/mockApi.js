@@ -1,4 +1,4 @@
-// This is here for this assignment only. It is critical to put this in .env file
+// This is here for this assignment only. I know it is critical to put this in .env file
 const BASE_URL = "https://69ea242515c7e2d5126961c6.mockapi.io/api";
 
 export async function fetchCourses() {
@@ -36,6 +36,21 @@ export async function fetchCourseById(id) {
     console.error(`Network error while fetching course ${id}:`, error);
     return null;
   }
+}
+
+//This function just logs new users to mockAPI json. It has no use in the app.
+export async function createUser({ name, email }) {
+  const response = await fetch(`${BASE_URL}/users`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to create user (${response.status})`);
+  }
+
+  return response.json();
 }
 
 export async function fetchCategories() {

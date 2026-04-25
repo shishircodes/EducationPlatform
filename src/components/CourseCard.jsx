@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 import Card, { CardBody, CardFooter } from "./Card";
-import Badge from "./Badge";
 import ProgressBar from "./ProgressBar";
 import Button from "./Button";
 
@@ -8,17 +7,17 @@ export default function CourseCard({ course, progress, enrolled }) {
   return (
     <Card className="flex h-full flex-col">
       <CardBody className="flex-1">
-        <div className="mb-3 flex flex-wrap gap-2">
-          <Badge variant="brand">{course.category}</Badge>
-          <Badge>{course.level}</Badge>
-          <Badge>{course.duration}</Badge>
-        </div>
+        <p className="mb-2 text-xs font-medium text-brand">
+          {course.category}
+        </p>
         <h3 className="mb-1 text-lg font-semibold text-fg">
           <Link to={`/courses/${course.id}`} className="hover:text-brand">
             {course.title}
           </Link>
         </h3>
-        <p className="mb-3 text-sm text-fg-muted">by {course.instructor}</p>
+        <p className="mb-3 text-sm text-fg-muted">
+          by {course.instructor} &middot; {course.level} &middot; {course.duration}
+        </p>
         <p className="text-sm text-fg line-clamp-3">{course.description}</p>
       </CardBody>
       <CardFooter className="flex flex-col gap-3">

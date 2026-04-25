@@ -5,20 +5,25 @@ const useUserStore = create(
   persist(
     (set, get) => ({
       name: "",
+      email: "",
       enrollments: {},
       getStartedOpen: false,
 
       isLoggedIn: () => Boolean(get().name),
 
-      login: (name) => {
-        const v = name.trim();
-        if (!v) return;
-        set({ name: v, getStartedOpen: false });
+      login: ({ name, email }) => {
+        const trimmedName = name.trim();
+        const trimmedEmail = email.trim();
+        if (!trimmedName || !trimmedEmail) return;
+        set({
+          name: trimmedName,
+          email: trimmedEmail,
+          getStartedOpen: false,
+        });
       },
 
-      resetUserData: () => set({ name: "", enrollments: {} }),
-
-      setName: (name) => set({ name }),
+      resetUserData: () =>
+        set({ name: "", email: "", enrollments: {} }),
 
       openGetStarted: () => set({ getStartedOpen: true }),
       closeGetStarted: () => set({ getStartedOpen: false }),
@@ -61,10 +66,31 @@ const useUserStore = create(
             },
           };
         }),
+
+      // Marks a lesson complete (idempotent — never un-completes).
+      markLessonComplete: (courseId, lessonId) =>
+        set((s) => {
+          const current = s.enrollments[courseId];
+          if (!current) return s;
+          if (current.completedLessons.includes(lessonId)) return s;
+          return {
+            enrollments: {
+              ...s.enrollments,
+              [courseId]: {
+                ...current,
+                completedLessons: [...current.completedLessons, lessonId],
+              },
+            },
+          };
+        }),
     }),
     {
       name: "edu-platform-user-v1",
-      partialize: (s) => ({ name: s.name, enrollments: s.enrollments }),
+      partialize: (s) => ({
+        name: s.name,
+        email: s.email,
+        enrollments: s.enrollments,
+      }),
     }
   )
 );

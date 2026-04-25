@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { FaArrowLeft } from "react-icons/fa";
 import Button from "../components/Button";
-import Badge from "../components/Badge";
 import Card, { CardBody, CardHeader } from "../components/Card";
 import ProgressBar from "../components/ProgressBar";
 import LessonItem from "../components/LessonItem";
@@ -50,16 +49,16 @@ export default function CourseDetail() {
 
       <Card>
         <CardBody>
-          <div className="mb-3 flex flex-wrap gap-2">
-            <Badge variant="brand">{course.category}</Badge>
-            <Badge>{course.level}</Badge>
-            <Badge>{course.duration}</Badge>
-            <Badge>{course.lessons.length} lessons</Badge>
-          </div>
+          <p className="mb-3 text-xs font-medium text-brand">
+            {course.category}
+          </p>
           <h1 className="mb-2 text-3xl font-semibold tracking-tight text-fg">
             {course.title}
           </h1>
-          <p className="mb-4 text-sm text-fg-muted">by {course.instructor}</p>
+          <p className="mb-4 text-sm text-fg-muted">
+            by {course.instructor} &middot; {course.level} &middot;{" "}
+            {course.duration} &middot; {course.lessons.length} lessons
+          </p>
           <p className="mb-6 text-fg">{course.description}</p>
 
           {enrolled ? (
@@ -98,6 +97,7 @@ export default function CourseDetail() {
               lesson={lesson}
               index={i}
               completed={completedIds.includes(lesson.id)}
+              href={enrolled ? `/courses/${id}/lessons/${lesson.id}` : undefined}
               onToggle={() => {
                 if (!enrolled) {
                   toast.info("Please enroll in this course to track lessons.", {

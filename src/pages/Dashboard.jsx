@@ -3,7 +3,6 @@ import { Link, Navigate } from "react-router";
 import Card, { CardBody } from "../components/Card";
 import Button from "../components/Button";
 import ProgressBar from "../components/ProgressBar";
-import Badge from "../components/Badge";
 import EmptyState from "../components/EmptyState";
 import { fetchCourses } from "../api/mockApi";
 import { getResource } from "../api/resourceCache";
@@ -50,7 +49,6 @@ export default function Dashboard() {
   );
 }
 
-/* ----------  Data helpers ---------- */
 
 // Combine the raw course list with the user's enrollment data so each item
 // already carries its own progress percentage and enrollment record.
@@ -67,7 +65,7 @@ function buildMyCourses(courses, enrollments) {
     });
 }
 
-// Aggregate counts for the four stat cards at the top of the page.
+
 function buildStats(myCourses) {
   const totalLessons = myCourses.reduce(
     (sum, course) => sum + (course.lessonCount ?? 0),
@@ -92,8 +90,6 @@ function getCtaLabel(pct) {
   if (pct > 0) return "Continue";
   return "Start";
 }
-
-/* ----------  Sub-components ---------- */
 
 function DashboardHeader({ name }) {
   return (
@@ -156,22 +152,21 @@ function EnrolledCourseCard({ course }) {
       <CardBody>
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-1">
-            <div className="mb-2 flex flex-wrap gap-2">
-              <Badge variant="brand">{course.category}</Badge>
-              <Badge>{course.level}</Badge>
+            <p className="mb-2 text-xs font-medium text-brand">
+              {course.category}
               {isComplete && (
-                <Badge variant="success" dot>
-                  Completed
-                </Badge>
+                <span className="ml-2 text-success">&middot; Completed</span>
               )}
-            </div>
+            </p>
 
             <h3 className="text-lg font-semibold text-fg">
               <Link to={`/courses/${course.id}`} className="hover:text-brand">
                 {course.title}
               </Link>
             </h3>
-            <p className="text-sm text-fg-muted">by {course.instructor}</p>
+            <p className="text-sm text-fg-muted">
+              by {course.instructor} &middot; {course.level}
+            </p>
           </div>
 
           <Link to={`/courses/${course.id}`}>

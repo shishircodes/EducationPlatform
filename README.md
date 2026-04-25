@@ -63,6 +63,6 @@ learn-to-Dev is a react web application, which was created as part of the ICT930
 
 - Component Architecture - UI components (Button, Card, Badge, Spinner) are seperated from feature components (CourseCard, LessionItem) and Layout shells (Navbar, Footer, Layout) which promotes the reusability and enhances good system design practices.
 - State Management - Zustand was selected for state management because of its minimal API and excellent DX. The zustand store handles authentication, enrollments and course progression in one centralized place.
-- Data Later - A dedicated /api module is developed to make MOCKApi calls returning objects and handling all errors so that UI never crashes on a failed request to MOCKApi.io server.
+- Data Layer - A dedicated /api module is developed to make MOCKApi calls returning objects and handling all errors so that UI never crashes on a failed request to MOCKApi.io server.
 - Styling - Tailwind CSS is used for styling of this web application because of its utility first styling that keeps component files co-located with their styles and makes sure there is consistent spacing and colour schemes through custom theme variables.
 - Accessibility - This web application has used semantic HTML elements and aria labels are used through out different areas of web app. The global modal traps focus can also be closed using a escape key or overlay click.

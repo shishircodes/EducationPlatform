@@ -21,10 +21,10 @@ export default function Home() {
       <section className="pt-6">
         <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-fg sm:text-6xl">
           Learn at your own pace,{" "}
-          <span className="text-brand">build for real.</span>
+          <span className="text-brand">with realtime tracking.</span>
         </h1>
         <p className="mt-5 max-w-xl text-lg text-fg-muted">
-          Browse curated courses, enroll with a click, and track your progress
+          Browse professional courses, enroll with a click, and track your progress
           lesson by lesson. Your progress is saved on this device.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
@@ -33,8 +33,8 @@ export default function Home() {
           </Link>
           {loggedIn ? (
             <Link to="/dashboard">
-              <Button variant="secondary" size="lg">
-                My dashboard ({enrolledCount})
+              <Button variant="secondary" size="lg" className="gap-2">
+                My dashboard ({enrolledCount}) <FaArrowRight />
               </Button>
             </Link>
           ) : (

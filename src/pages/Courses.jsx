@@ -1,4 +1,5 @@
 import { use, useMemo, useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
 import CourseCard from "../components/CourseCard";
 import { fetchCourses, fetchCategories } from "../api/mockApi";
 import { getResource } from "../api/resourceCache";
@@ -49,23 +50,20 @@ export default function Courses() {
           placeholder="Search courses..."
           className="w-full rounded-full border border-line bg-surface px-4 py-2 text-sm text-fg placeholder:text-fg-subtle focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft sm:max-w-xs"
         />
-        <div className="flex flex-wrap gap-2">
-          {categories.map((c) => {
-            const active = category === c;
-            return (
-              <button
-                key={c}
-                onClick={() => setCategory(c)}
-                className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer ${
-                  active
-                    ? "border-brand bg-brand text-brand-fg"
-                    : "border-line bg-surface text-fg-muted hover:bg-surface-muted hover:text-fg"
-                }`}
-              >
-                {c}
-              </button>
-            );
-          })}
+
+        <div className="relative">
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="cursor-pointer appearance-none rounded-full border border-line bg-surface py-2 pl-4 pr-10 text-sm font-medium text-fg focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand-soft"
+          >
+            {categories.map((c) => (
+              <option key={c} value={c}>
+                {c === "All" ? "All categories" : c}
+              </option>
+            ))}
+          </select>
+          <FaChevronDown className="pointer-events-none absolute right-4 top-1/2 h-3 w-3 -translate-y-1/2 text-fg-muted" />
         </div>
       </div>
 
